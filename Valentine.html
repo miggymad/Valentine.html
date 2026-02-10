@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Be My Valentine 💖</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    font-family: 'Arial', sans-serif;
+  }
+
+  .card {
+    position: relative;
+    background: white;
+    padding: 60px 40px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+    max-width: 500px;
+    width: 95%;
+    min-height: 600px;
+  }
+
+  .top-message {
+    color: #ff4d6d;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 20px;
+    min-height: 30px;
+    text-align: center;
+  }
+
+  img.cat {
+    width: 220px;
+    border-radius: 15px;
+    display: block;
+    margin: 20px auto 20px auto;
+  }
+
+  .message {
+    color: #ff4d6d;
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: 30px;
+    min-height: 30px;
+    text-align: center;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  button {
+    background: none;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    color: #ff4d6d;
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.3s ease;
+  }
+
+  button.no {
+    color: #333;
+  }
+
+  button:hover {
+    text-decoration: underline;
+  }
+
+  /* Glitch effect */
+  @keyframes glitch {
+    0% { transform: translate(0,0) rotate(0deg); }
+    20% { transform: translate(-3px, 2px) rotate(-2deg); }
+    40% { transform: translate(3px, -2px) rotate(2deg); }
+    60% { transform: translate(-2px, 2px) rotate(-1deg); }
+    80% { transform: translate(2px, -2px) rotate(1deg); }
+    100% { transform: translate(0,0) rotate(0deg); }
+  }
+
+  .glitch {
+    animation: glitch 0.3s infinite;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="top-message" id="topMessage"></div>
+
+  <img src="https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExcmw0OHJucHl3czQzaDdxc3owcjEyZWZtMGp1djJlc2RmcHR1c2h0bSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/Zl7u48zLVFgLpRwq6f/giphy.gif" 
+       id="catGif" class="cat" alt="Valentine Cat">
+
+  <div class="message" id="message">Will you be my Valentine?</div>
+
+  <div class="buttons">
+    <button class="yes" id="yesBtn" onclick="yesClick()">Yes na yes!</button>
+    <button class="no" id="noBtn" onclick="noClick()">Ayaw ko</button>
+  </div>
+</div>
+
+<script>
+const catGif = document.getElementById('catGif');
+const messageDiv = document.getElementById('message');
+const topMessageDiv = document.getElementById('topMessage');
+const noButton = document.getElementById('noBtn');
+const yesButton = document.getElementById('yesBtn');
+
+// No button phrases, messages, and GIFs
+const noPhrases = ["Ayaw", "NO", "ihh", "HAHAHAHA ayaw ko pa rin","Ayawww", "Epal"];
+const messages = ["Ayaw mo talaga?? ", "Mag yes kana plss :( ", "Ahhh nanghihinaa akooo!! ", "Sige na, please ", "No choice kana! "];
+const cryingGifs = [
+  "https://media.giphy.com/media/fFa05KbZowXiEIyRse/giphy.gif",
+  "https://media.giphy.com/media/7AzEXdIb1wyCTWJntb/giphy.gif",
+  "https://media.giphy.com/media/fYLrVmLXG9tVL4Aykg/giphy.gif",
+  "https://media.giphy.com/media/esuCuMhXE4kksVpqbB/giphy.gif",
+  "https://media.giphy.com/media/In0Lpu4FVivjISX9HT/giphy.gif"
+];
+
+let clickCount = 0;
+
+function noClick() {
+  if (clickCount < noPhrases.length - 1) {
+    noButton.textContent = noPhrases[clickCount + 1];
+    catGif.src = cryingGifs[clickCount];
+    messageDiv.textContent = messages[clickCount];
+  } else {
+    // Last click: glitch No button and move Yes to center
+    noButton.classList.add("glitch");
+    messageDiv.textContent = messages[messages.length - 1];
+
+    // Move Yes to center under GIF/message
+    yesButton.style.order = "-1";
+    yesButton.style.marginTop = "20px";
+
+    setTimeout(() => noButton.style.display = "none", 1200);
+  }
+  clickCount++;
+}
+
+function yesClick() {
+  topMessageDiv.textContent = "Bembang ka sakin HAHAHAHAHAHA"; // show above GIF
+  catGif.src = "https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExa3NyM3dwNXAyMXQ4dGpzczI3cnEwN2huanlzaWFwNXpzMG5ncHc0MiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/T70hpBP1L0N7U0jtkq/giphy.gif";
+  messageDiv.textContent = "I love youuuu!! 💖";
+  noButton.style.display = 'none';
+  yesButton.style.display = 'none';
+}
+</script>
+</body>
+</html>
